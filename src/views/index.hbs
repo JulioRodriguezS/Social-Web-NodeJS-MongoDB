@@ -1,0 +1,49 @@
+<div class="card mt-4">
+    <div class="card-header bg-dark">
+        <h4 class="card-title text-white">
+            <i class="fas fa-image"></i> Upload Image
+        </h4>
+    </div>
+    <div class="card-body">
+        <form action="/images" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <label for="sbmtImage" class="custom-file-label">Select Image</label>
+                        <input type="file" name="sbmtImage" id="sbmtImage" class="custom-file-input"
+                            aria-describedby="inputGoupFileAddon" required />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title">Image Title</label>
+                <input type="text" name="title" class="form-control" placeholder="tipe the title">
+            </div>
+            <div class="form-group">
+                <label for="description">Type Description</label>
+                <textarea name="description" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success form-control" type="submit">
+                    <i class="fas fa-upload"></i> Send Image
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header bg-dark text-white">
+        <h4><i class="fas fa-images"></i> Recent Images</h4>
+    </div>
+    <div class="card-body">
+        <div class="row" id="recentImages">
+            {{#each images}}
+                <div class="col-md-4">
+                    <a href="/images/{{partFileName}}">
+                        <img src="/public/upload/{{fullFileName}}" alt="" class="w-100 h-100 img-thumbnail">
+                    </a>
+                </div>
+            {{/each}}   
+        </div>
+    </div>
+</div>
