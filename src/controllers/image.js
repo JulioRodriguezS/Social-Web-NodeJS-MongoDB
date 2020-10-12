@@ -25,14 +25,14 @@ ctrl.index = async (req, res, next) => {
 }
 
 ctrl.create = async (req, res, next) => {
-    ctrl.saveImage(req, res, next)
+    await ctrl.saveImage(req, res, next)
 }
 
 ctrl.saveImage = async (req, res, next) => {
     let randomName = helpers.randomName()
     let findImage = Image.find({ fileName: randomName })
     if (findImage.lenght > 0) {
-        ctrl.saveImage(req, res, next)
+        await ctrl.saveImage(req, res, next)
     }
     else {
         const ext = path.extname(req.file.originalname).toLowerCase()
