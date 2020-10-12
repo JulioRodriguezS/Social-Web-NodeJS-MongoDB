@@ -1,0 +1,27 @@
+{{#if sidebar.comments}}
+<div class="card mt-2">
+    <div class="card-header bg-dark text-white">
+        <h5><i class="fas fa-comments"></i> Last Comments</h5>
+    </div>
+    <div class="card-body">
+        {{#each sidebar.comments}}
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="/images/{{image.partFileName}}">
+                            <img src="/public/upload/{{image.fullFileName}}" alt="comment image"
+                                class="w-100 img-thumbnail">
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        -{{comment}} <br>
+                        <small class="text-muted">{{name}}, {{timeAgo savedDate}}</small>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        {{/each}}
+    </div>
+</div>
+{{/if}}

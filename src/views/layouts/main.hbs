@@ -42,14 +42,17 @@
         </div>
     </nav>
     <div class="container">
-        <div class="col-md-8">
-            {{{ body }}}
+        <div class="row">
+            <div class="col-md-8">
+                {{{ body }}}
 
+            </div>
+            <div class="col-md-4">
+                {{>stats}}
+                {{>popular}}
+                {{>comments}}
+            </div>
         </div>
-        <div class="col-md-4">
-
-        </div>
-
     </div>
     <!--bootstrap js-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

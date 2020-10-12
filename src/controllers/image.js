@@ -5,8 +5,8 @@ const helpers = require('../helpers/libs')
 const md5 = require('md5')
 const image = require('../models/image')
 const ctrl = {}
-const viewModel = { image: {}, comments: {} }
-
+let viewModel = { image: {}, comments: {} }
+let sidebar = require('../helpers/sidebar')
 
 ctrl.index = async (req, res, next) => {
     const tmpImage = await Image.findOne({ partFileName: req.params.image_id })
@@ -17,6 +17,7 @@ ctrl.index = async (req, res, next) => {
         viewModel.image = image
         let comments = await Comment.find({ imageId: image._id }).lean().sort({ savedDate: -1 })
         viewModel.comments = comments
+        viewModel = await sidebar(viewModel)
         res.render('image', viewModel)
     } else {
         res.redirect('/')
