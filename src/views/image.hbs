@@ -1,18 +1,18 @@
 <div class="card mt-4">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h2>{{image.title}}</h2>
-        <button class="btn btn-danger" id="btn_delete" data-id="{{image.partFileName}}">
-            <i class="fas fa-times"></i> Delete
+        <button class="btn btn-danger" id="btnDelete" data-id="{{image.partFileName}}">
+            <i class="fas fa-times"></i> <span>Delete</span> 
         </button>
     </div>
     <div class="card-body">
         <p>{{image.description}}</p>
         <div class="text-center">
-            <img src="/public/upload/{{image.fullFileName}}" class="img-fluid" alt="">
+            <img id="imgRequested" src="/public/upload/{{image.fullFileName}}" class="img-fluid" alt="">
         </div>
     </div>
     <div class="card-footer d-flex justify-content-between align-items-center">
-        <button class="btn btn-success" id="btnLike" data-id="{{image.fullFileName}}">
+        <button class="btn btn-success" id="btnLike" data-id="{{image.partFileName}}">
             <i class="fas fa-thumbs-up"></i> Like
         </button>
         <p>
@@ -36,7 +36,7 @@
         </button>
     </div>
     <div class="card-body">
-        <blockquote>
+        <blockquote id="postComment">
             <form action="/images/{{image.partFileName}}/comment" method="POST">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -57,5 +57,24 @@
                 </div>
             </form>
         </blockquote>
+        <ul class="list-group p-4">
+            {{#each comments}}
+            <li class="list-group-item">
+                <div class="row">
+                    <a href="#" class="col text-center">
+                        <img src="https://gravatar.com/avatar/{{gravatar}}?d=monsterid&id=45" alt="gravatar">
+                    </a>
+                    <blockquote class="col">
+                        <p class="lead">{{comment}}</p>
+                        <footer class="blockquote-footer">
+                            {{name}}-{{timeAgo savedDate}}
+                        </footer>
+                    </blockquote>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
     </div>
 </div>
+
+

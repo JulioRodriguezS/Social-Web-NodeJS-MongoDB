@@ -10,7 +10,7 @@ module.exports = (app, express)=>{
     router.post('/images',image.create)
     router.post('/images/:image_id/like/',image.like)
     router.post('/images/:image_id/comment/',image.comment)
-    router.get('/images/:image_id',image.delete)
+    router.delete('/images/:image_id',image.delete)
 
     app.use(router)
 }
