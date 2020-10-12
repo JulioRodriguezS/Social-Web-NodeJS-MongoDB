@@ -49,11 +49,8 @@ ctrl.saveImage = async (req, res, next) => {
             })
 
             await newImage.save()
-                .then(() => {
-                    console.log('image data saved')
-                    res.redirect(`/images/${randomName}`)
-                })
-                .catch()
+            res.redirect(`/images/${randomName}`)
+               
         }
         else {
             await fs.unlink(tempPath)
