@@ -57,8 +57,9 @@ async function saveImage (req, res, next) {
                
         }
         else {
-            try{await fs.unlink(tempPath)}
-            catch(err){console.log('console unlink err msg: ',err)}
+            await fs.unlink(tempPath,(err,data)=>{
+                console.log('console message error: ',err,', console data error:',data)
+            })
             res.status(500).json({ error: "only images are allowed" })
         }
     }
@@ -94,11 +95,13 @@ ctrl.comment = async (req, res, next) => {
 
 ctrl.delete = async (req, res, next) => {
     let partFileName = req.params.image_id
-    let image = await Image.findOne({partFileName})
+    let image = await Image.findOne({partFileName}).catch((err)=>{console.log('error:',err)})
     if(image){
-        await fs.unlink(`./src/public/upload/${image.fullFileName}`)
-        await Comment.deleteOne({imageId:image._id})
-        await image.remove()
+        await fs.unlink(`./src/public/upload/${image.fullFileName}`, (err,data)=>{
+            console.log('console message error: ',err,', console data error:',data)
+        })
+        await Comment.deleteOne({imageId:image._id}).catch((err)=>{console.log('error:',err)})
+        await image.remove().catch((err)=>{console.log('error:',err)})
         res.json(true)
     }else{
         res.status(500).json({error:'Internal Server Error'})
