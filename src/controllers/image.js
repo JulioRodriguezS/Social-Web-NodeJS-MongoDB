@@ -40,8 +40,9 @@ async function saveImage (req, res, next) {
         const targetPath = path.resolve(`src/public/upload/${randomName}${ext}`)
 
         if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif") {
-            try{await fs.rename(tempPath, targetPath)}
-            catch(err){console.log('console err msg: ',err)}
+            await fs.rename(tempPath, targetPath,(err,data)=>{
+                console.log('console rename message error: ',err,', console data error:',data)
+            })
             
 
             let newImage = new Image({
@@ -57,7 +58,7 @@ async function saveImage (req, res, next) {
         }
         else {
             try{await fs.unlink(tempPath)}
-            catch(err){console.log('console err msg: ',err)}
+            catch(err){console.log('console unlink err msg: ',err)}
             res.status(500).json({ error: "only images are allowed" })
         }
     }
