@@ -25,10 +25,10 @@ ctrl.index = async (req, res, next) => {
 }
 
 ctrl.create = async (req, res, next) => {
-    await ctrl.saveImage(req, res, next).catch((err)=>{console.log('error:',err)})
+    await saveImage(req, res, next)
 }
 
-ctrl.saveImage = async (req, res, next) => {
+async function saveImage (req, res, next) {
     let randomName = helpers.randomName()
     let findImage = Image.find({ fileName: randomName })
     if (findImage.lenght > 0) {
@@ -46,14 +46,14 @@ ctrl.saveImage = async (req, res, next) => {
                 description: req.body.description,
                 fullFileName: randomName + ext,
                 partFileName: randomName
-            }).catch((err)=>{console.log('error:',err)})
+            })
 
             await newImage.save().catch((err)=>{console.log('error:',err)})
             res.redirect(`/images/${randomName}`)
                
         }
         else {
-            await fs.unlink(tempPath).catch((err)=>{console.log('error:',err)})
+            await fs.unlink(tempPath)
             res.status(500).json({ error: "only images are allowed" })
         }
     }
