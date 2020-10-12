@@ -25,7 +25,7 @@ ctrl.index = async (req, res, next) => {
 }
 
 ctrl.create = async (req, res, next) => {
-    await ctrl.saveImage(req, res, next)
+    await ctrl.saveImage(req, res, next).catch((err)=>{console.log('error:',err)})
 }
 
 ctrl.saveImage = async (req, res, next) => {
